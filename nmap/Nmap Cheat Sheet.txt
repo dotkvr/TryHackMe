@@ -1,0 +1,66 @@
+📌 Nmap Cheat Sheet (TryHackMe Essentials)
+🟦 Descoberta de Hosts
+
+nmap -sn 10.10.0.0/24 → Descobre hosts ativos (ping scan).
+
+nmap -Pn <IP> → Assume que o host está up mesmo sem ping.
+
+nmap -sL <range> → Só lista alvos (não escaneia).
+
+🟩 Scans de Portas (TCP/UDP)
+
+nmap -sS <IP> → TCP SYN Scan (stealth, padrão em pentest).
+
+nmap -sT <IP> → TCP Connect (quando não tem root/sudo).
+
+nmap -sU <IP> → UDP Scan (ex.: DNS, SNMP, NTP).
+
+nmap -p- <IP> → Escaneia todas as portas.
+
+nmap -F <IP> → Escaneia 100 portas mais comuns.
+
+nmap --top-ports 1000 <IP> → Escaneia as 1000 portas mais usadas.
+
+nmap -p22,80,443 <IP> → Escaneia portas específicas.
+
+🟨 Enumeração (Serviços e SO)
+
+nmap -sV <IP> → Detecta versão dos serviços.
+
+nmap -O <IP> → Identifica sistema operacional.
+
+nmap -A <IP> → Agressivo: inclui -sV, -O, scripts básicos, traceroute.
+
+nmap -sC <IP> → Roda scripts default (NSE).
+
+🟧 NSE (Nmap Scripting Engine)
+
+nmap --script vuln <IP> → Testa vulnerabilidades conhecidas.
+
+nmap --script http-* -p80,443 <IP> → Scripts para serviços web.
+
+nmap --script smb* -p445 <IP> → Scripts para SMB (Windows shares, enumeração).
+
+nmap --script safe,default <IP> → Enumeração inicial sem causar dano.
+
+🟥 Performance & Timing
+
+nmap -T4 <IP> → Rápido, ainda confiável (mais usado).
+
+nmap -T5 <IP> → Muito rápido, mas barulhento.
+
+nmap --max-rate 100 <IP> → Máx. 100 pacotes/s.
+
+nmap --min-rate 50 <IP> → Mín. 50 pacotes/s.
+
+nmap --host-timeout 2m <IP> → Aborta scan se host demorar >2min.
+
+🟪 Saída & Logging
+
+nmap -oN scan.txt <IP> → Salva em arquivo normal (txt).
+
+nmap -oA results <IP> → Salva em todos os formatos (.nmap, .gnmap, .xml).
+
+nmap --open <IP> → Mostra apenas portas abertas.
+
+nmap --reason <IP> → Explica o porquê de cada resultado.
